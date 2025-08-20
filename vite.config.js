@@ -1,24 +1,13 @@
-import { defineConfig, loadEnv } from "vite";
+import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
-// https://vite.dev/config/
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), "");
-  const repoName = env.VITE_REPO_NAME ? env.VITE_REPO_NAME : "";
-  return {
-    base: repoName ? `/${repoName}/` : "/",
-    plugins: [react(), tailwindcss()],
-    server: {
-      open: true,
-      host: false, // Allow access from network devices
-      proxy: {
-        "/api": {
-          target: "http://localhost:5173",
-          changeOrigin: true,
-          secure: false,
-        },
-      },
-    },
-  };
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  base: "/",
+  server: {
+    host: true, // Allow LAN access
+    open: true,
+    // proxy: { "/api": { target: "http://localhost:3000", changeOrigin: true } } // Enable only if you have a backend
+  },
 });

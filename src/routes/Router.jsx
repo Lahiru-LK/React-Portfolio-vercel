@@ -23,7 +23,7 @@ const ErrorElement = ({ error }) => (
 export const router = createBrowserRouter(
   [
     {
-      path: `/`,
+      path: "/",
       element: (
         <Suspense fallback={<Loading />}>
           <Main />
@@ -32,7 +32,7 @@ export const router = createBrowserRouter(
       children: [
         {
           path: "/",
-          element: <Home></Home>,
+          element: <Home />,
         },
       ],
     },
@@ -41,6 +41,5 @@ export const router = createBrowserRouter(
       element: <NotFound />,
       errorElement: <ErrorElement />,
     },
-  ],
-  { basename: `/${repoName}` }
+  ]
 );
